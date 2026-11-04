@@ -1,0 +1,92 @@
+# Commandes utilisées – TP2 GRUB2
+
+## 1. Informations sur le système
+
+```bash
+uname -r
+cat /etc/redhat-release
+```
+
+## 2. Vérification du démarrage et des noyaux
+
+```bash
+ls -l /boot
+ls -l /boot/grub2
+rpm -q kernel-core
+```
+
+## 3. Consultation des fichiers GRUB2
+
+```bash
+cat /etc/default/grub
+ls -l /etc/grub.d/
+cat /etc/grub.d/40_custom
+```
+
+## 4. Sauvegarde de la configuration
+
+```bash
+cp /etc/default/grub /etc/default/grub.bak
+```
+
+## 5. Modification des paramètres GRUB2
+
+Fichier concerné :
+
+```bash
+nano /etc/default/grub
+```
+
+Paramètres étudiés :
+
+```bash
+GRUB_TIMEOUT=10
+GRUB_TIMEOUT_STYLE=menu
+GRUB_DEFAULT=1
+```
+
+## 6. Modification des entrées personnalisées
+
+```bash
+nano /etc/grub.d/40_custom
+```
+
+## 7. Génération de la configuration GRUB2
+
+Sur une installation BIOS :
+
+```bash
+grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+
+Sur une installation UEFI, vérifier le chemin de configuration utilisé par le système avant de générer le fichier.
+
+## 8. Vérification
+
+```bash
+grub2-editenv list
+```
+
+## 9. Récupération du mot de passe root
+
+Commandes étudiées dans l'environnement de récupération :
+
+```bash
+mount -o remount,rw /sysroot
+chroot /sysroot
+passwd
+touch /.autorelabel
+exit
+exit
+```
+
+## 10. Protection de GRUB2
+
+```bash
+grub2-setpassword
+ls -l /boot/grub2/user.cfg
+```
+
+---
+
+**Remarque :** les commandes et résultats doivent correspondre aux manipulations réellement effectuées pendant le TP.
